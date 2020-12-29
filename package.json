@@ -51,7 +51,6 @@
     "dist"
   ],
   "dependencies": {
-    "axios": "^0.21.0",
     "prop-types": "^15.7.2",
     "styled-components": "^5.2.1"
   }
