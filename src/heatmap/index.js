@@ -30,8 +30,6 @@ const HeatMapTable = (props) => {
   const axisLabelColor = props.axisLabelColor || '#fff' 
   const nullColor = props.nullColor || '#000'
 
-
-
   const determineWidth = (yLabels) => {
     let maxLen = 0
     yLabels.forEach((l)=> {
@@ -123,7 +121,7 @@ const HeatMapTable = (props) => {
             borderColor={nullColor}
             background={background(c)}
           >
-        { showLabels && <span>{cells.scales[i].toFixed(1)}</span> }
+        { showLabels && <span>{props.formatter(cells.scales[i])}</span> }
           </Td> 
         </Tooltip>)
       })
@@ -181,7 +179,18 @@ HeatMapTable.propTypes = {
   useAvg: PropTypes.bool,
   width: PropTypes.number,
   height: PropTypes.number,
-  resize: PropTypes.bool
+  resize: PropTypes.bool,
+  formatter: PropTypes.func
+}
+
+HeatMapTable.defaultProps = {
+  formatter: (value) => { 
+    const isDecimal = (num) => {
+      return !!(num % 1)
+    }
+    if(!isDecimal(value)) return value
+    return value.toFixed(1)
+  }
 }
   
 export default HeatMapTable

@@ -42,6 +42,7 @@ const Axis = styled.div`
   justify-content: center;
   align-items: center;
   text-overflow: ellipsis; 
+  cursor: pointer;
 `
 
 const XAxis = styled.div`
@@ -54,6 +55,7 @@ const XAxis = styled.div`
   align-items: center;
   text-overflow: ellipsis; 
   text-align: center; 
+  cursor: pointer;
 `
 const AxisLabel = styled.div`
   flex:1;

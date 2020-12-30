@@ -59,6 +59,7 @@ const Example = () => {
                     true = each table cells's h and w are set using the above calculation and dividing by 2 (essentially forming squares rather than rectangles).
                     it should be noted that setting to true will cause the component's size to be modifed (i.e. not honoring set height and width)
  * `resize`         *optional* boolean to indicate if the component should be resized. resize = true will be ignored if a height and width been set.
+ * `formatter`      *optional* function to format table values (this will not format tips)
 
 ## License
 
