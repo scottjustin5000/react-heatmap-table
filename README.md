@@ -10,6 +10,10 @@
 npm install --save react-heatmap-table
 ```
 
+<img width="408" alt="Screen Shot 2020-12-28 at 8 47 23 PM" src="https://user-images.githubusercontent.com/2997998/103319570-1f84c500-49e7-11eb-9abc-c255673a704d.png">
+
+[Example](http://sj5000-heatmap-table.s3-website-us-east-1.amazonaws.com/)
+
 ## Usage
 
 ```jsx
