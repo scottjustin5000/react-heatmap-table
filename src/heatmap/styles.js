@@ -19,7 +19,7 @@ const Td = styled.div.attrs(props => ({
   min-width:${props => props.width}px;
   border: solid 1px ${props => props.borderColor};
   cursor: pointer;
-  font-size: 0.3em;
+  font-size: 0.4em;
 `
 const NulledTd = styled.div`
   display: flex;
@@ -63,8 +63,20 @@ const AxisLabel = styled.div`
   padding-left: 2px;
   white-space: nowrap; 
   overflow: hidden;  
-  font-size: 0.4em;
+  font-size: 0.5em;
   width: ${props=> props.width}px; 
+  text-overflow: ellipsis;
+`
+
+const CellLabel = styled.div`
+  flex:1;
+  box-sizing: border-box;
+  white-space: nowrap; 
+  overflow: hidden;  
+  font-size: 0.3em;
+  justify-content: center;
+  text-align: center;
+  max-width: ${props=> props.width}px; 
   text-overflow: ellipsis;
 `
 
@@ -74,5 +86,6 @@ export {
   NulledTd,
   Axis,
   XAxis,
-  AxisLabel
+  AxisLabel,
+  CellLabel
 }

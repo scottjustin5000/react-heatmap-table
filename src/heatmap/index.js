@@ -10,12 +10,13 @@ import {
   NulledTd,
   Axis,
   XAxis,
-  AxisLabel
+  AxisLabel,
+  CellLabel
 } from './styles'
 
 
 const HeatMapTable = (props) => {
-  const resize = props.resize && !props.height && !props.width
+  const resize = props.resize && !props.height && !props.width && !props.cellSize
   const MIN = 14
   const ref = useRef()
   const savedCallback = useRef()
@@ -39,7 +40,7 @@ const HeatMapTable = (props) => {
     return yw
   }
 
-  const setDimensionData = ({yLabels, xLabels, width, height, useAvg }) => {
+  const setDimensionData = ({yLabels, xLabels, width, height, useAvg, showLabels }) => {
 
     if(width === componentWidth && height === componentHeight) return
       const yw = determineWidth(yLabels)
@@ -50,8 +51,10 @@ const HeatMapTable = (props) => {
       setComponentWidth(width)
       setComponentHeight(height)
       const avg = (h + w) / 2
-      if(avg < MIN) {
+      if(h < MIN || w < MIN) {
         setShowLabels(false)
+      } else if(showLabels) {
+        setShowLabels(true)
       } 
       if(useAvg) {
         setHeight(avg)
@@ -69,9 +72,18 @@ const HeatMapTable = (props) => {
     const heatMap = new HeatMap(props.xLabels, input)
     
     const data = heatMap.getData()
-    const componentWidth = props.width || ref.current.parentNode.clientWidth 
-    const componentHeight = props.height || ref.current.parentNode.clientHeight
-    setDimensionData({ xLabels: props.xLabels, yLabels: props.yLabels, height: componentHeight, width: componentWidth, useAvg: props.useAvg })
+    if(!props.cellSize) {
+      const componentWidth = props.width || ref.current.parentNode.clientWidth 
+      const componentHeight = props.height || ref.current.parentNode.clientHeight
+      setDimensionData({ xLabels: props.xLabels, yLabels: props.yLabels, height: componentHeight, width: componentWidth, useAvg: props.useAvg, showLabels: props.showLabels })
+    } else {
+      if(props.cellSize < MIN) setShowLabels(false)
+      const yw = determineWidth(props.yLabels)
+      setYWidth(yw)
+      setComponentHeight(props.cellSize * (props.yLabels.length + 1))
+      setHeight(props.cellSize)
+      setWidth(props.cellSize)
+    }
     setData(data)
 
   }, [props.data, props.yLabels, props.xLabels])
@@ -84,7 +96,7 @@ const HeatMapTable = (props) => {
       if(!resize) return
       const width = ref.current.parentNode.clientWidth 
       const height = ref.current.parentNode.clientHeight
-      func({ xLabels: props.xLabels, yLabels: props.yLabels, height, width, useAvg: props.useAvg })
+      func({ xLabels: props.xLabels, yLabels: props.yLabels, height, width, useAvg: props.useAvg, showLabels: props.showLabels })
     }, 200)
     window.addEventListener('resize', debouncedResizeHandler)
     return () => window.removeEventListener('resize', debouncedResizeHandler);
@@ -108,7 +120,6 @@ const HeatMapTable = (props) => {
               width={width} 
               background={nullColor}
               color={nullColor}>
-                <span style={{ fontSize: '0.3em' }}></span>
             </NulledTd>
           )
         }
@@ -121,7 +132,7 @@ const HeatMapTable = (props) => {
             borderColor={nullColor}
             background={background(c)}
           >
-        { showLabels && <span>{props.formatter(cells.scales[i])}</span> }
+        { showLabels && <CellLabel width={width}>{props.formatter(cells.scales[i])}</CellLabel> }
           </Td> 
         </Tooltip>)
       })
@@ -170,6 +181,7 @@ const HeatMapTable = (props) => {
 }
 
 HeatMapTable.propTypes = {
+  cellSize: PropTypes.number,
   showLabels: PropTypes.bool,
   axisLabelColor: PropTypes.string,
   nullColor: PropTypes.string,

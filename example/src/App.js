@@ -5721,15 +5721,15 @@ const App = () => {
       setHeatMapData2({ data: winPercentages, xLabels, yLabels })
 
       const data = [
-        [0.846, 0.635, 0.876, 0.667, 0.819, 0.934, 0.765, 0.832, 0.123],
-        [0.673, 0.832, 0.818, 0.934, 0.812, 0.378, 0.578, 0.796, 0.133],
-        [0.227, 0.812, 0.856, 0.671, 0.145, 0.678, 0.978, 0.690, 0.133],
-        [0.875, 0.8, 0.833, 1, 1, 1, 0.478, 1, 0.933],
+        [0.846, 0.635, 0.876, 0.667, 0.819, 0.934, 0.765, 0.832, 0.223],
+        [0.673, 0.832, 0.818, 0.934, 0.812, 0.778, 0.578, 0.796, 0.133],
+        [0.727, 0.812, 0.856, 0.671, 0.545, 0.678, 0.978, 0.290, 0.133],
+        [0.875, 0.8, 0.933, 1, 1, 1, 0.878, 1, 0.933],
         [0.933, 0.923, 0.916, 0.875, 0.947, 0.900, 0.463, 0.231, 0.978],
-        [1, null, 0.8, 0.875, 0.727, 0.878, 0.778, 1, 0.890],
+        [0.8, null, 0.8, 0.875, 0.727, 0.878, 0.778, 1, 0.890],
         [0, 0.435, 0.876, null, 0.819, 0.234, 0.87, 0.999, 0.333],
         [0.134, 0.148, 0.118, 0.234, 0.312, 0.448, 0.778, null, 0.733],
-        [0.127, 0.612, 0.356, 0.1, 0.23, 0.318, 0.228, 0, 0.133]
+        [0.127, 0.212, 0.356, 0.565, 0.23, 0.318, 0.228, 0, 0.133]
       ]
       const yLabels1 = ['september','august','july','june','may','april','march','february','january']
       const xLabels1 = ['a','b','c','d','e', 'f', 'g', 'h', 'i']
@@ -5738,15 +5738,60 @@ const App = () => {
    fetchHeatMap()
   },[])
 
-  return <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', width:'100%', justifyContent:'center', alignItems: 'center' }}>
-  <div> 
-    <HeatMap width={800} height={600} {...heatMapData2} />  
+  return (
+  <div style={{ margin: '24px', display: 'flex', flexDirection: 'column', justifyContent:'center', alignItems: 'center' }}>
+  <div style={{ display: 'flex'}}>
+  <HeatMap width={800} height={600} {...heatMapData2} />  
+  <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+   <pre>
+     {`
+      <HeatMap 
+        width={800} 
+        height={600} 
+        data={data}  
+        xLabels={xLabels}    
+        yLabels={yLabels}    
+        />
+    `}
+   </pre>
+ </div> 
   </div>
   <div style={{minHeight: '50px'}} />
+  <div style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
   <div style={{ width:'30%', minHeight: '200px' }}> 
     <HeatMap resize showLabels {...heatMapData} />  
   </div>
-</div>
+  <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+   <pre>
+     {`
+      <HeatMap 
+        resize
+        showLabels
+        data={data}  
+        xLabels={xLabels}    
+        yLabels={yLabels}    
+        />
+    `}
+   </pre>
+ </div> 
+ </div>
+ <div style={{minHeight: '50px'}} />
+  <div style={{display:'flex', justifyContent: 'center'}}> 
+    <HeatMap cellSize={15} {...heatMapData} /> 
+    <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+   <pre>
+     {`
+      <HeatMap 
+        cellSize={15}
+        data={data}  
+        xLabels={xLabels}    
+        yLabels={yLabels}    
+        />
+    `}
+   </pre>
+ </div>  
+  </div>
+</div>)
 }
 
 export default App

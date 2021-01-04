@@ -64,6 +64,7 @@ const Example = () => {
                     it should be noted that setting to true will cause the component's size to be modifed (i.e. not honoring set height and width)
  * `resize`         *optional* boolean to indicate if the component should be resized. resize = true will be ignored if a height and width been set.
  * `formatter`      *optional* function to format table values (this will not format tips)
+ * `cellSize`       *optional* setting for cell size, if used table size may expand beyond parent container size
 
 ## License
 
