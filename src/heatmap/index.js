@@ -11,7 +11,8 @@ import {
   Axis,
   XAxis,
   AxisLabel,
-  CellLabel
+  CellLabel,
+  XAxisLabel
 } from './styles'
 
 
@@ -36,7 +37,7 @@ const HeatMapTable = (props) => {
     yLabels.forEach((l)=> {
       maxLen = Math.max(maxLen, l.toString().length)
     })
-    const yw = Math.min(yWidth, maxLen * 6)
+    const yw = Math.min(yWidth, maxLen * 8)
     return yw
   }
 
@@ -158,7 +159,7 @@ const HeatMapTable = (props) => {
     const tiles = () => props.xLabels.map(h => 
       <Tooltip key={`xatt_${h}`} title={h}>
         <XAxis key={`footer_${h}`} height={height} width={width} axisLabelColor={axisLabelColor} color={nullColor}> 
-          <AxisLabel width={width}>{ h }</AxisLabel> 
+          <XAxisLabel width={width}>{ h }</XAxisLabel> 
         </XAxis> 
       </Tooltip>
       )

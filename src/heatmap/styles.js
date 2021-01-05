@@ -63,6 +63,17 @@ const AxisLabel = styled.div`
   padding-left: 2px;
   white-space: nowrap; 
   overflow: hidden;  
+  font-size: 0.65em;
+  width: ${props=> props.width}px; 
+  text-overflow: ellipsis;
+`
+
+const XAxisLabel = styled.div`
+  flex:1;
+  box-sizing: border-box;
+  padding-left: 2px;
+  white-space: nowrap; 
+  overflow: hidden;  
   font-size: 0.5em;
   width: ${props=> props.width}px; 
   text-overflow: ellipsis;
@@ -73,7 +84,7 @@ const CellLabel = styled.div`
   box-sizing: border-box;
   white-space: nowrap; 
   overflow: hidden;  
-  font-size: 0.3em;
+  font-size: 0.5em;
   justify-content: center;
   text-align: center;
   max-width: ${props=> props.width}px; 
@@ -87,5 +98,6 @@ export {
   Axis,
   XAxis,
   AxisLabel,
+  XAxisLabel,
   CellLabel
 }
